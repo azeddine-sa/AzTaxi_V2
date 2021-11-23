@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.AzTaxi_V3" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.AzTaxi_V3" parent="Theme.AppCompat.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
@@ -17,6 +17,34 @@
     <style name="Theme.AzTaxi_V3.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <!-- Zone de Texte Page de Connexion-->
+    <style name="et_main">
+        <item name="android:background">@color/white</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:padding">15dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+    </style>
+
+    <!-- Bouton -->
+    <style name="Btn" parent="@android:style/Widget.Button">
+        <item name="android:background">@color/blue_logo</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!-- Inscription -->
+    <style name="pasEncoreInscrit" >
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:shadowColor">@color/blue_logo</item>
+        <item name="android:shadowDx">3</item>
+        <item name="android:shadowDy">3</item>
+        <item name="android:shadowRadius">5</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_marginTop">20dp</item>
     </style>
 
     <style name="Theme.AzTaxi_V3.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

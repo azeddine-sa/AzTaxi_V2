@@ -1,4 +1,4 @@
-package be.azsa.aztaxi_v3;
+package be.azsa.aztaxi_v3.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import be.azsa.aztaxi_v3.R;
 
 public class ContactUsFragment extends Fragment {
 

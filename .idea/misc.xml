@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/saout/AndroidStudioProjects/AzTaxi_V3/app/src/main/res/layout/activity_login.xml" value="0.1390625" />
         <entry key="..\:/Users/saout/AndroidStudioProjects/AzTaxi_V3/app/src/main/res/layout/activity_main.xml" value="0.14175724637681159" />
+        <entry key="..\:/Users/saout/AndroidStudioProjects/AzTaxi_V3/app/src/main/res/layout/activity_register.xml" value="0.125" />
         <entry key="..\:/Users/saout/AndroidStudioProjects/AzTaxi_V3/app/src/main/res/layout/app_bar_main.xml" value="0.14628623188405798" />
         <entry key="..\:/Users/saout/AndroidStudioProjects/AzTaxi_V3/app/src/main/res/layout/content_main.xml" value="0.14628623188405798" />
         <entry key="..\:/Users/saout/AndroidStudioProjects/AzTaxi_V3/app/src/main/res/layout/fragment_book.xml" value="0.1" />
@@ -11,11 +13,13 @@
         <entry key="..\:/Users/saout/AndroidStudioProjects/AzTaxi_V3/app/src/main/res/layout/fragment_gallery.xml" value="0.14628623188405798" />
         <entry key="..\:/Users/saout/AndroidStudioProjects/AzTaxi_V3/app/src/main/res/layout/fragment_history.xml" value="0.14175724637681159" />
         <entry key="..\:/Users/saout/AndroidStudioProjects/AzTaxi_V3/app/src/main/res/layout/fragment_home.xml" value="0.14628623188405798" />
+        <entry key="..\:/Users/saout/AndroidStudioProjects/AzTaxi_V3/app/src/main/res/layout/fragment_map.xml" value="0.12760416666666666" />
         <entry key="..\:/Users/saout/AndroidStudioProjects/AzTaxi_V3/app/src/main/res/layout/fragment_profil.xml" value="0.1390625" />
         <entry key="..\:/Users/saout/AndroidStudioProjects/AzTaxi_V3/app/src/main/res/layout/fragment_slideshow.xml" value="0.14628623188405798" />
         <entry key="..\:/Users/saout/AndroidStudioProjects/AzTaxi_V3/app/src/main/res/layout/nav_header.xml" value="0.1390625" />
         <entry key="..\:/Users/saout/AndroidStudioProjects/AzTaxi_V3/app/src/main/res/layout/nav_header_main.xml" value="0.14628623188405798" />
         <entry key="..\:/Users/saout/AndroidStudioProjects/AzTaxi_V3/app/src/main/res/menu/drawer_menu.xml" value="0.1546875" />
+        <entry key="..\:/Users/saout/AndroidStudioProjects/AzTaxi_V3/app/src/main/res/xml/network_security_config.xml" value="0.14175724637681159" />
       </map>
     </option>
   </component>

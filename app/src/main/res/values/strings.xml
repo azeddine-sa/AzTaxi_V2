@@ -3,4 +3,17 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <string name="mail">" Adresse Mail"</string>
+    <string name="password">" Mot de Passe"</string>
+    <string name="repeatPassword">" Répéter Mot de passe"</string>
+    <string name="not_subscribe">Pas encore inscrit ?\nCliquez ici</string>
+    <string name="connect">Se connecter</string>
+    <string name="trait__">____________________________</string>
+    <string name="cgu_acceptation">J\'accepte les termes et conditions</string>
+    <string name="signUp">S\'inscrire</string>
+    <string name="phoneNumber">" Numéro de Téléphone"</string>
+    <string name="lastname">" Nom"</string>
+    <string name="firstname">" Prénom"</string>
+
+
 </resources>
