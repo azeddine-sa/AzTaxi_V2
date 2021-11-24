@@ -3,6 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/saout/AndroidStudioProjects/AzTaxi_V3/app/src/main/res/drawable/ic_contact_us.xml" value="0.12864583333333332" />
+        <entry key="..\:/Users/saout/AndroidStudioProjects/AzTaxi_V3/app/src/main/res/drawable/ic_logout.xml" value="0.12864583333333332" />
+        <entry key="..\:/Users/saout/AndroidStudioProjects/AzTaxi_V3/app/src/main/res/drawable/ic_mail.xml" value="0.12864583333333332" />
+        <entry key="..\:/Users/saout/AndroidStudioProjects/AzTaxi_V3/app/src/main/res/drawable/ic_map.xml" value="0.12864583333333332" />
+        <entry key="..\:/Users/saout/AndroidStudioProjects/AzTaxi_V3/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.12864583333333332" />
+        <entry key="..\:/Users/saout/AndroidStudioProjects/AzTaxi_V3/app/src/main/res/drawable/ic_phone.xml" value="0.12864583333333332" />
+        <entry key="..\:/Users/saout/AndroidStudioProjects/AzTaxi_V3/app/src/main/res/drawable/ic_profil.xml" value="0.12864583333333332" />
+        <entry key="..\:/Users/saout/AndroidStudioProjects/AzTaxi_V3/app/src/main/res/drawable/ic_taxi.xml" value="0.12864583333333332" />
+        <entry key="..\:/Users/saout/AndroidStudioProjects/AzTaxi_V3/app/src/main/res/drawable/rec_et.xml" value="0.19583333333333333" />
+        <entry key="..\:/Users/saout/AndroidStudioProjects/AzTaxi_V3/app/src/main/res/drawable/side_nav_bar.xml" value="0.12864583333333332" />
         <entry key="..\:/Users/saout/AndroidStudioProjects/AzTaxi_V3/app/src/main/res/layout/activity_login.xml" value="0.1390625" />
         <entry key="..\:/Users/saout/AndroidStudioProjects/AzTaxi_V3/app/src/main/res/layout/activity_main.xml" value="0.14175724637681159" />
         <entry key="..\:/Users/saout/AndroidStudioProjects/AzTaxi_V3/app/src/main/res/layout/activity_register.xml" value="0.125" />

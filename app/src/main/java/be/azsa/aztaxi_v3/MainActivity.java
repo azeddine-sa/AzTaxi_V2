@@ -30,6 +30,7 @@ import com.google.android.material.navigation.NavigationView;
 import be.azsa.aztaxi_v3.fragment.BookFragment;
 import be.azsa.aztaxi_v3.fragment.ContactUsFragment;
 import be.azsa.aztaxi_v3.fragment.HistoryFragment;
+import be.azsa.aztaxi_v3.fragment.HomeFragment;
 import be.azsa.aztaxi_v3.fragment.ProfilFragment;
 import be.azsa.aztaxi_v3.model.User;
 
@@ -66,6 +67,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        if(savedInstanceState==null){
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                    new HomeFragment()).commit();
+        }
+
+        //Envoie de données d'une activité vers un fragment
         Intent intent = getIntent();
         if(intent!=null){
             if(intent.hasExtra("idUser")){
@@ -122,8 +132,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new ContactUsFragment()).commit();
                 break;
-
-
+            case R.id.nav_logout:
+                Intent LogOut = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(LogOut);
+                Toast.makeText(MainActivity.this, "Déconnexion", Toast.LENGTH_SHORT).show();
+                break;
         }
 
         drawer.closeDrawer(GravityCompat.START);

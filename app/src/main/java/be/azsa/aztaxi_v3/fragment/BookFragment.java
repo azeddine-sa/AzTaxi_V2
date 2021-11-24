@@ -46,17 +46,17 @@ public class BookFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_book, container, false);
+        View view = inflater.inflate(R.layout.fragment_book, container, false);
 
-        book_depart = (EditText) rootView.findViewById(R.id.et_book_depart);
-        book_destination = (EditText) rootView.findViewById(R.id.et_book_destination);
+        book_depart = (EditText) view.findViewById(R.id.et_book_depart);
+        book_destination = (EditText) view.findViewById(R.id.et_book_destination);
         book_when = LocalDate.now();
-        book_infos = (EditText) rootView.findViewById(R.id.et_book_infos);
+        book_infos = (EditText) view.findViewById(R.id.et_book_infos);
 
-        book_commander = (Button) rootView.findViewById(R.id.btn_book_commander);
+        book_commander = (Button) view.findViewById(R.id.btn_book_commander);
         book_commander.setOnClickListener(book_commander_listener);
 
-        return rootView;
+        return view;
     }
 
     private View.OnClickListener book_commander_listener  = new View.OnClickListener() {
@@ -64,7 +64,7 @@ public class BookFragment extends Fragment {
         public void onClick(View v) {
             //code
             //Volley
-            String postUrl = "http://192.168.141.234:8080/api/order/add";
+            String postUrl = "http://192.168.64.234:8080/api/order/add";
             RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
 
             //User
@@ -107,10 +107,7 @@ public class BookFragment extends Fragment {
                 requestQueue.add(jsonObjectRequest);
 
                 Toast.makeText(getActivity().getApplicationContext(), "Commande executée", Toast.LENGTH_SHORT).show();
-
-                //redirection vers la page de connexion
-                Intent Home = new Intent(getActivity().getApplicationContext(), MainActivity.class);
-                startActivity(Home);
+                ;
 
             }
         }

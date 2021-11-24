@@ -2,8 +2,94 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/teal_700">
+    android:padding="16dp">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
+        <!--Button
+            android:id="@+id/btn_contactus_back"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/ic_back"/-->
+
+        <TextView
+            android:id="@+id/tv_contactus_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Contactez-nous"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
+            android:gravity="center"
+            android:textSize="30sp"/>
+
+        <TextView
+            android:id="@+id/tv_contactus_object"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sujet :"
+            android:textSize="18dp"
+            android:padding="10dp"/>
+
+        <EditText
+            android:id="@+id/et_contactus_object"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:ems="10"
+            android:hint="Objet de la demande"
+            android:inputType="textShortMessage|textAutoCorrect"
+            android:padding="10dp"
+            android:background="@drawable/rec_et"/>
+
+        <TextView
+            android:id="@+id/tv_contactus_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Votre Message :"
+            android:textSize="18dp"
+            android:padding="10dp"/>
+
+        <EditText
+            android:id="@+id/et_contactus_message"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginBottom="10dp"
+            android:ems="10"
+            android:inputType="textMultiLine|textPersonName"
+            android:padding="10dp"
+            android:hint="Votre message ..."
+            android:gravity="top|left"
+            android:background="@drawable/rec_et"/>
+
+        <Button
+            android:id="@+id/btn_contactus_send"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Envoyer"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="10dp"
+            style="@style/Btn"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Vous pouvez également\nnous contacter\npar téléphone au :"
+            android:textSize="18dp"
+            android:gravity="center"/>
+        <TextView
+            android:id="@+id/tv_contactus_call"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="02/222.22.22"
+            android:textColor="@color/purple_500"
+            android:textSize="30dp"
+            android:gravity="center"/>
+
+    </LinearLayout>
 
 </RelativeLayout>
