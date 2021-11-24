@@ -107,7 +107,6 @@ public class BookFragment extends Fragment {
                 requestQueue.add(jsonObjectRequest);
 
                 Toast.makeText(getActivity().getApplicationContext(), "Commande executée", Toast.LENGTH_SHORT).show();
-                ;
 
             }
         }
