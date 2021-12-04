@@ -3,7 +3,6 @@ package be.azsa.aztaxi_v3.fragment;
 import static androidx.core.content.ContextCompat.getSystemService;
 
 import android.Manifest;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -27,6 +26,7 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -37,6 +37,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -51,12 +52,12 @@ import be.azsa.aztaxi_v3.MainActivity;
 import be.azsa.aztaxi_v3.R;
 import be.azsa.aztaxi_v3.model.User;
 
-public class HomeFragment extends Fragment implements LocationListener, GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnMyLocationClickListener {
+public class HomeFragment extends Fragment implements LocationListener {
     //Google Maps
     private static final int PERMS_CALL_ID = 1234;
     private LocationManager lm;
     private Location location;
-    private MapFragment mapFragment;
+    private MapView mapView;
     private GoogleMap googleMap;
     private Geocoder geocoder;
 
@@ -84,6 +85,12 @@ public class HomeFragment extends Fragment implements LocationListener, GoogleMa
         home_destination = (EditText) view.findViewById(R.id.et_home_destination);
         home_submit = (Button) view.findViewById(R.id.btn_home_submit);
         home_submit.setOnClickListener(home_submit_listener);
+
+        mapView = (MapView) view.findViewById(R.id.map);
+        mapView.onCreate(savedInstanceState);
+
+        mapView.onResume();
+
 
         //return
         return view;
@@ -169,6 +176,8 @@ public class HomeFragment extends Fragment implements LocationListener, GoogleMa
         if (lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
             lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 10000, 0, this);
         }
+
+        loadMap();
     }
 
     @Override
@@ -183,6 +192,13 @@ public class HomeFragment extends Fragment implements LocationListener, GoogleMa
     public void onPause() {
         super.onPause();
 
+        final FragmentManager fragmentManager = this.getChildFragmentManager();
+        final Fragment fragment = fragmentManager.findFragmentById(R.id.map);
+        if(fragment!=null){
+            fragmentManager.beginTransaction().remove(fragment).commit();
+            googleMap=null;
+        }
+
         if (lm != null){
             lm.removeUpdates(this);
         }
@@ -190,7 +206,7 @@ public class HomeFragment extends Fragment implements LocationListener, GoogleMa
 
     @SuppressWarnings("MissingPermission")
     private void loadMap(){
-        mapFragment.getMapAsync(new OnMapReadyCallback() {
+        mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(@NonNull GoogleMap googleMap) {
                 HomeFragment.this.googleMap = googleMap;
@@ -221,19 +237,5 @@ public class HomeFragment extends Fragment implements LocationListener, GoogleMa
 
     @Override
     public void onProviderDisabled(@NonNull String provider) {
-    }
-
-    @Override
-    public boolean onMyLocationButtonClick() {
-        Toast.makeText(getActivity(), "MyLocation button clicked", Toast.LENGTH_SHORT)
-                .show();
-        // Return false so that we don't consume the event and the default behavior still occurs
-        // (the camera animates to the user's current position).
-        return false;
-    }
-
-    @Override
-    public void onMyLocationClick(@NonNull Location location) {
-        Toast.makeText(getActivity(), "Current location:\n" + location, Toast.LENGTH_LONG).show();
     }
 }
