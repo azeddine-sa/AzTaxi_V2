@@ -3,6 +3,7 @@ package be.azsa.aztaxi_v3.fragment;
 import static androidx.core.content.ContextCompat.getSystemService;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -34,6 +35,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -42,11 +44,18 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.AutocompleteActivity;
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 
 import be.azsa.aztaxi_v3.MainActivity;
 import be.azsa.aztaxi_v3.R;
@@ -81,6 +90,7 @@ public class HomeFragment extends Fragment implements LocationListener {
             }
         }
 
+        //assign variable
         home_depart = (EditText) view.findViewById(R.id.et_home_depart);
         home_destination = (EditText) view.findViewById(R.id.et_home_destination);
         home_submit = (Button) view.findViewById(R.id.btn_home_submit);
@@ -91,6 +101,12 @@ public class HomeFragment extends Fragment implements LocationListener {
 
         mapView.onResume();
 
+        //init place
+        Places.initialize(getContext(), "AIzaSyAXu-Syn_KlkIqGq7TKrHqJBQIC_2aZ1zo");
+        home_depart.setFocusable(false);
+        home_depart.setOnClickListener(home_depart_listener);
+        home_destination.setFocusable(false);
+        home_destination.setOnClickListener(home_destination_listener);
 
         //return
         return view;
@@ -146,6 +162,49 @@ public class HomeFragment extends Fragment implements LocationListener {
             }
         }
     };
+    public View.OnClickListener home_depart_listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            //init place field list
+            List<Place.Field> fieldList = Arrays.asList(Place.Field.ADDRESS,
+                    Place.Field.LAT_LNG, Place.Field.NAME);
+            //intent
+            Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY,
+                    fieldList).build(getContext());
+            //start
+            startActivityForResult(intent, 100);
+        }
+    };
+    public View.OnClickListener home_destination_listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            //init place field list
+            List<Place.Field> fieldList = Arrays.asList(Place.Field.ADDRESS,
+                    Place.Field.LAT_LNG, Place.Field.NAME);
+            //intent
+            Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY,
+                    fieldList).build(getContext());
+            //start
+            startActivityForResult(intent, 200);
+        }
+    };
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==100 && resultCode == Activity.RESULT_OK){
+            Place place = Autocomplete.getPlaceFromIntent(data);
+            //Set Address on editText
+            home_depart.setText(place.getAddress());
+        } else if(requestCode==200 && resultCode == Activity.RESULT_OK){
+            Place place = Autocomplete.getPlaceFromIntent(data);
+            //Set Address on editText
+            home_destination.setText(place.getAddress());
+        } else if (resultCode == AutocompleteActivity.RESULT_ERROR){
+            Status status = Autocomplete.getStatusFromIntent(data);
+            Toast.makeText(getContext(),status.getStatusMessage(),Toast.LENGTH_SHORT).show();
+        }
+    }
 
     @Override
     public void onResume() {

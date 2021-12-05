@@ -14,6 +14,8 @@
     <string name="phoneNumber">" Numéro de Téléphone"</string>
     <string name="lastname">" Nom"</string>
     <string name="firstname">" Prénom"</string>
+    <string name="API_KEY">"AIzaSyAXu-Syn_KlkIqGq7TKrHqJBQIC_2aZ1zo"</string>
+
 
 
 </resources>

@@ -40,7 +40,7 @@
         <!-- Clé Google Maps API -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyB-USn02BjU1wEtd_SYOpja4lD8Q0WDnAg" />
+            android:value="@string/API_KEY" />
     </application>
 
 </manifest>
