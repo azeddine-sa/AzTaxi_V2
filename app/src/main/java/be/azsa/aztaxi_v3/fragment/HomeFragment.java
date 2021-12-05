@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
@@ -53,9 +54,11 @@ import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 import be.azsa.aztaxi_v3.MainActivity;
 import be.azsa.aztaxi_v3.R;
@@ -112,7 +115,7 @@ public class HomeFragment extends Fragment implements LocationListener {
         return view;
     }
 
-
+    //Listener submit
     public View.OnClickListener home_submit_listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -162,6 +165,7 @@ public class HomeFragment extends Fragment implements LocationListener {
             }
         }
     };
+    //Autocomplete destination
     public View.OnClickListener home_depart_listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -175,6 +179,7 @@ public class HomeFragment extends Fragment implements LocationListener {
             startActivityForResult(intent, 100);
         }
     };
+    //Autocomplete depart
     public View.OnClickListener home_destination_listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -274,6 +279,7 @@ public class HomeFragment extends Fragment implements LocationListener {
             }
         });
     }
+
     private Object getSystemService(Object systemService) {
         return systemService;
     }
@@ -283,6 +289,22 @@ public class HomeFragment extends Fragment implements LocationListener {
         if(googleMap != null){
             LatLng googleLocation = new LatLng(location.getLatitude(), location.getLongitude());
             googleMap.moveCamera(CameraUpdateFactory.newLatLng(googleLocation));
+
+            Geocoder geocoder = new Geocoder(getContext(), Locale.getDefault());
+
+            try {
+                List<Address> listAddress = geocoder.getFromLocation(
+                        location.getLatitude(),
+                        location.getLongitude(),
+                        1);
+                if (listAddress.size()>0){
+                    if (home_depart.getText().toString().isEmpty()){
+                        home_depart.setText(listAddress.get(0).getAddressLine(0));
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
