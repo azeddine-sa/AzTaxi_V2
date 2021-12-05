@@ -1,5 +1,6 @@
 package be.azsa.aztaxi_v3.fragment;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +32,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.common.api.Status;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.AutocompleteActivity;
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,8 +45,11 @@ import org.json.JSONObject;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 import java.util.SimpleTimeZone;
 
 import be.azsa.aztaxi_v3.MainActivity;
@@ -73,6 +84,13 @@ public class BookFragment extends Fragment {
         book_time = (TextView) view.findViewById(R.id.tv_book_time);
         book_commander = (Button) view.findViewById(R.id.btn_book_commander);
 
+        //init place
+        Places.initialize(getContext(), "AIzaSyAXu-Syn_KlkIqGq7TKrHqJBQIC_2aZ1zo");
+        book_depart.setFocusable(false);
+        book_depart.setOnClickListener(book_depart_listener);
+        book_destination.setFocusable(false);
+        book_destination.setOnClickListener(book_destination_listener);
+
         //onClickListener
         book_date.setOnClickListener(book_date_listener);
         book_time.setOnClickListener(book_time_listener);
@@ -104,7 +122,7 @@ public class BookFragment extends Fragment {
             datePickerDialog.show();
         }
     };
-
+    //Timepicker
     private View.OnClickListener book_time_listener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -130,7 +148,35 @@ public class BookFragment extends Fragment {
             timePickerDialog.show();
         }
     };
-
+    //Autocomplete Depart listener
+    private View.OnClickListener book_depart_listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            //init place field list
+            List<Place.Field> fieldList = Arrays.asList(Place.Field.ADDRESS,
+                    Place.Field.LAT_LNG, Place.Field.NAME);
+            //intent
+            Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY,
+                    fieldList).build(getContext());
+            //start
+            startActivityForResult(intent, 100);
+        }
+    };
+    //Autocomplete Destination listener
+    private View.OnClickListener book_destination_listener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            //init place field list
+            List<Place.Field> fieldList = Arrays.asList(Place.Field.ADDRESS,
+                    Place.Field.LAT_LNG, Place.Field.NAME);
+            //intent
+            Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY,
+                    fieldList).build(getContext());
+            //start
+            startActivityForResult(intent, 200);
+        }
+    };
+    //Submit Listener
     private View.OnClickListener book_commander_listener  = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -142,8 +188,13 @@ public class BookFragment extends Fragment {
             //User
             String departure = book_depart.getText().toString().toLowerCase();
             String arrival = book_destination.getText().toString().toLowerCase();
-            Date datetime = null;
-            String infos = book_infos.getText().toString();
+            String info = book_infos.getText().toString().toLowerCase();
+
+            //date&time
+            String date = book_date.getText().toString();
+            String time = book_time.getText().toString();
+            String datetime = date +" "+ time;
+            Log.i("DEBBUG", datetime);
 
             if (departure.isEmpty()){
                 Toast.makeText(getActivity().getApplicationContext(),
@@ -157,6 +208,8 @@ public class BookFragment extends Fragment {
                 try {
                     postData.put("departure", departure);
                     postData.put("arrival", arrival);
+                    postData.put("datetime", datetime);
+                    postData.put("infos", info);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -183,4 +236,21 @@ public class BookFragment extends Fragment {
             }
         }
     };
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==100 && resultCode == Activity.RESULT_OK){
+            Place place = Autocomplete.getPlaceFromIntent(data);
+            //Set Address on editText
+            book_depart.setText(place.getAddress());
+        } else if(requestCode==200 && resultCode == Activity.RESULT_OK){
+            Place place = Autocomplete.getPlaceFromIntent(data);
+            //Set Address on editText
+            book_destination.setText(place.getAddress());
+        } else if (resultCode == AutocompleteActivity.RESULT_ERROR){
+            Status status = Autocomplete.getStatusFromIntent(data);
+            Toast.makeText(getContext(),status.getStatusMessage(),Toast.LENGTH_SHORT).show();
+        }
+    }
 }
