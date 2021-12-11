@@ -142,8 +142,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 bfTransaction.replace(R.id.fragment_container, bookFrag).commit();
                 break;
             case R.id.nav_history:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new HistoryFragment()).commit();
+                HistoryFragment historyFrag = new HistoryFragment();
+                FragmentTransaction hfTransaction = getSupportFragmentManager().beginTransaction();
+
+                //Donné d'activité à envoyer
+                Bundle bundlehistory = new Bundle();
+                bundlehistory.putString("idUser", idUser);
+                bundlehistory.putString("firstname", firstname);
+                bundlehistory.putString("lastname", lastname);
+                bundlehistory.putString("email", email);
+                bundlehistory.putString("password", password);
+                bundlehistory.putString("phone", phone);
+
+                historyFrag.setArguments(bundlehistory);
+
+                hfTransaction.replace(R.id.fragment_container, historyFrag).commit();
                 break;
             case R.id.nav_profil:
                 ProfilFragment profilFrag = new ProfilFragment();

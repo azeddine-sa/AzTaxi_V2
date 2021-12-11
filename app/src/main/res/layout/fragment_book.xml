@@ -52,14 +52,16 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <TextView
                 android:id="@+id/tv_book_date"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="0dp"
-                android:padding="10dp"
                 android:hint="Date ?"
-                android:textAlignment="center"/>
+                android:textSize="18dp"
+                android:padding="10dp"
+                android:textAlignment="center" />
 
             <TextView
                 android:id="@+id/tv_book_time"
@@ -69,6 +71,7 @@
                 android:layout_marginEnd="0dp"
                 android:padding="10dp"
                 android:hint="Heure ?"
+                android:textSize="18dp"
                 android:textAlignment="center"/>
         </RelativeLayout>
 
