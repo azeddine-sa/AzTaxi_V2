@@ -72,11 +72,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        if(savedInstanceState==null){
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new HomeFragment()).commit();
-        }
-
         //Récupération données de connexions
         Intent intent = getIntent();
         if(intent!=null){
@@ -95,6 +90,25 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         Log.i("USER", firstname.toString()+" "+lastname.toString());
+
+        if(savedInstanceState==null){
+            HomeFragment homeFrag = new HomeFragment();
+            FragmentTransaction hfTransaction = getSupportFragmentManager().beginTransaction();
+
+            //Donné d'activité à envoyer
+            Bundle bundlehome = new Bundle();
+            bundlehome.putString("idUser", idUser);
+            bundlehome.putString("firstname", firstname);
+            bundlehome.putString("lastname", lastname);
+            bundlehome.putString("email", email);
+            bundlehome.putString("password", password);
+            bundlehome.putString("phone", phone);
+
+            homeFrag.setArguments(bundlehome);
+
+            hfTransaction.replace(R.id.fragment_container,homeFrag).commit();
+        }
+
     }
 
 
@@ -111,8 +125,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.nav_book:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new BookFragment()).commit();
+                BookFragment bookFrag = new BookFragment();
+                FragmentTransaction bfTransaction = getSupportFragmentManager().beginTransaction();
+
+                //Donné d'activité à envoyer
+                Bundle bundlebook = new Bundle();
+                bundlebook.putString("idUser", idUser);
+                bundlebook.putString("firstname", firstname);
+                bundlebook.putString("lastname", lastname);
+                bundlebook.putString("email", email);
+                bundlebook.putString("password", password);
+                bundlebook.putString("phone", phone);
+
+                bookFrag.setArguments(bundlebook);
+
+                bfTransaction.replace(R.id.fragment_container, bookFrag).commit();
                 break;
             case R.id.nav_history:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -120,20 +147,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.nav_profil:
                 ProfilFragment profilFrag = new ProfilFragment();
-                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                FragmentTransaction pfTransaction = getSupportFragmentManager().beginTransaction();
 
                 //Donné d'activité à envoyer
-                Bundle bundle = new Bundle();
-                bundle.putString("idUser", idUser);
-                bundle.putString("firstname", firstname);
-                bundle.putString("lastname", lastname);
-                bundle.putString("email", email);
-                bundle.putString("password", password);
-                bundle.putString("phone", phone);
+                Bundle bundleprofil = new Bundle();
+                bundleprofil.putString("idUser", idUser);
+                bundleprofil.putString("firstname", firstname);
+                bundleprofil.putString("lastname", lastname);
+                bundleprofil.putString("email", email);
+                bundleprofil.putString("password", password);
+                bundleprofil.putString("phone", phone);
 
-                profilFrag.setArguments(bundle);
+                profilFrag.setArguments(bundleprofil);
 
-                fragmentTransaction.replace(R.id.fragment_container,profilFrag).commit();
+                pfTransaction.replace(R.id.fragment_container,profilFrag).commit();
                 break;
             case R.id.nav_contact_us:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,

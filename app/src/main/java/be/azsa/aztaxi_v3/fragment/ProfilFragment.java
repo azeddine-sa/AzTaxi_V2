@@ -36,7 +36,7 @@ public class ProfilFragment extends Fragment {
     private EditText profil_firstname, profil_lastname,profil_mail,profil_oldpassword, profil_password, profil_password2, profil_phone;
     private Button profil_validation;
     private User user;
-    String idUser, firstname, lastname, email, password, phone;
+    private String idUser, firstname, lastname, email, password, phone;
     SendDataInterface sendDataInterface;
 
     @Nullable

@@ -75,7 +75,7 @@ public class HomeFragment extends Fragment implements LocationListener {
 
     //propriétés
     private User user;
-    private Long idUser;
+    private String idUser, firstname, lastname, email, password, phone;
     private TextView menu_commande, menu_trajets, menu_profil, menu_contactUs, menu_logout;
     private EditText home_depart, home_destination;
     private Button home_submit;
@@ -86,12 +86,15 @@ public class HomeFragment extends Fragment implements LocationListener {
         //init view
         View view = inflater.inflate(R.layout.fragment_map, container, false);
 
-        Intent home = getActivity().getIntent();
-        if(home!=null){
-            if(home.hasExtra("idUser")){
-                idUser = Long.parseLong(home.getStringExtra("idUser"));
-            }
-        }
+        // get arguments Bundle
+        idUser = getArguments().getString("idUser");
+        firstname = getArguments().getString("firstname");
+        lastname = getArguments().getString("lastname");
+        email = getArguments().getString("email");
+        password = getArguments().getString("password");
+        phone = getArguments().getString("phone");
+
+        user = new User(Long.parseLong(idUser),firstname,lastname,email,password,phone);
 
         //assign variable
         home_depart = (EditText) view.findViewById(R.id.et_home_depart);
@@ -136,12 +139,25 @@ public class HomeFragment extends Fragment implements LocationListener {
                         "Veuillez introduire une adresse de destination", Toast.LENGTH_SHORT).show();
             } else {
                 //Gson
+                //User Json
+                JSONObject userData = new JSONObject();
+                try {
+                    userData.put("idUser", user.getIdUser());
+                    userData.put("firstname", user.getFirstname());
+                    userData.put("lastname", user.getLastname());
+                    userData.put("email", user.getEmail());
+                    userData.put("password", user.getPassword());
+                    userData.put("phone", user.getPhone());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                //RequestPost Json
                 JSONObject postData = new JSONObject();
                 try {
                     postData.put("departure", departure);
                     postData.put("arrival", arrival);
                     postData.put("infos", "");
-                    postData.put("idUser", 1);
+                    postData.put("user", userData);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

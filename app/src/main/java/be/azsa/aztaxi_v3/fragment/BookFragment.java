@@ -54,10 +54,12 @@ import java.util.SimpleTimeZone;
 
 import be.azsa.aztaxi_v3.MainActivity;
 import be.azsa.aztaxi_v3.R;
+import be.azsa.aztaxi_v3.model.User;
 
 public class BookFragment extends Fragment {
 
-    private Long idUser;
+    private String idUser, firstname, lastname, email, password, phone;
+    private User user;
     private EditText book_depart, book_destination, book_infos ;
     private TextView book_date, book_time;
     private Button book_commander;
@@ -75,6 +77,16 @@ public class BookFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_book, container, false);
+
+        // get arguments Bundle
+        idUser = getArguments().getString("idUser");
+        firstname = getArguments().getString("firstname");
+        lastname = getArguments().getString("lastname");
+        email = getArguments().getString("email");
+        password = getArguments().getString("password");
+        phone = getArguments().getString("phone");
+
+        user = new User(Long.parseLong(idUser),firstname,lastname,email,password,phone);
 
         //initialistion
         book_depart = (EditText) view.findViewById(R.id.et_book_depart);
@@ -193,7 +205,7 @@ public class BookFragment extends Fragment {
             //date&time
             String date = book_date.getText().toString();
             String time = book_time.getText().toString();
-            String datetime = date +" "+ time;
+            String datetime = date +"T"+ time+":00.000";
             Log.i("DEBBUG", datetime);
 
             if (departure.isEmpty()){
@@ -204,12 +216,26 @@ public class BookFragment extends Fragment {
                         "Veuillez introduire une adresse de destination", Toast.LENGTH_SHORT).show();
             }else{
                 //Gson
+                //User Json
+                JSONObject userData = new JSONObject();
+                try {
+                    userData.put("idUser", user.getIdUser());
+                    userData.put("firstname", user.getFirstname());
+                    userData.put("lastname", user.getLastname());
+                    userData.put("email", user.getEmail());
+                    userData.put("password", user.getPassword());
+                    userData.put("phone", user.getPhone());
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                //RequestPost Json
                 JSONObject postData = new JSONObject();
                 try {
                     postData.put("departure", departure);
                     postData.put("arrival", arrival);
                     postData.put("datetime", datetime);
                     postData.put("infos", info);
+                    postData.put("user", userData);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
