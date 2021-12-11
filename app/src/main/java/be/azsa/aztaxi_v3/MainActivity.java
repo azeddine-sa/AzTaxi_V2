@@ -7,6 +7,8 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentStateManagerControl;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
 import android.content.Intent;
@@ -34,7 +36,7 @@ import be.azsa.aztaxi_v3.fragment.HomeFragment;
 import be.azsa.aztaxi_v3.fragment.ProfilFragment;
 import be.azsa.aztaxi_v3.model.User;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, ProfilFragment.SendDataInterface {
 
     //Donnée utilisateur
     private String idUser, firstname, lastname, email, phone, password;
@@ -75,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     new HomeFragment()).commit();
         }
 
-        //Envoie de données d'une activité vers un fragment
+        //Récupération données de connexions
         Intent intent = getIntent();
         if(intent!=null){
             if(intent.hasExtra("idUser")){
@@ -85,22 +87,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 email = intent.getStringExtra("email");
                 password = intent.getStringExtra("password");
                 phone = intent.getStringExtra("phone");
-                Log.i("TEST", idUser+" "+firstname+" "+lastname+" "+email);
 
-                Bundle bundle = new Bundle();
-                bundle.putString("idUser", idUser);
-                bundle.putString("firstname", firstname);
-                bundle.putString("lastname", lastname);
-                bundle.putString("email", email);
-                bundle.putString("password", password);
-                bundle.putString("phone", phone);
-
-                ProfilFragment profilFrag = new ProfilFragment();
-                profilFrag.setArguments(bundle);
+                user = new User(Long.parseLong(idUser), firstname, lastname, email,password,phone);
             }
         }else{
             Toast.makeText(MainActivity.this, "Erreur", Toast.LENGTH_SHORT).show();
         }
+
+        Log.i("USER", firstname.toString()+" "+lastname.toString());
     }
 
 
@@ -125,8 +119,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         new HistoryFragment()).commit();
                 break;
             case R.id.nav_profil:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ProfilFragment()).commit();
+                ProfilFragment profilFrag = new ProfilFragment();
+                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+
+                //Donné d'activité à envoyer
+                Bundle bundle = new Bundle();
+                bundle.putString("idUser", idUser);
+                bundle.putString("firstname", firstname);
+                bundle.putString("lastname", lastname);
+                bundle.putString("email", email);
+                bundle.putString("password", password);
+                bundle.putString("phone", phone);
+
+                profilFrag.setArguments(bundle);
+
+                fragmentTransaction.replace(R.id.fragment_container,profilFrag).commit();
                 break;
             case R.id.nav_contact_us:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -143,4 +150,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
+    //Update Data User from ProfilFragment
+    @Override
+    public void sendData(String firstname, String lastname, String email, String password, String phone) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+    }
 }

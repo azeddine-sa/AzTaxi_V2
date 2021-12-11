@@ -121,7 +121,7 @@ public class HomeFragment extends Fragment implements LocationListener {
         public void onClick(View v) {
             //code
             //Volley
-            String postUrl = "http://192.168.0.241:8080/api/order/add";
+            String postUrl = "http://192.168.145.234:8080/api/order/add";
             RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
 
             //User
@@ -201,10 +201,13 @@ public class HomeFragment extends Fragment implements LocationListener {
             Place place = Autocomplete.getPlaceFromIntent(data);
             //Set Address on editText
             home_depart.setText(place.getAddress());
+            googleMap.addMarker(new MarkerOptions().position(place.getLatLng()));
+            googleMap.moveCamera(CameraUpdateFactory.newLatLng(place.getLatLng()));
         } else if(requestCode==200 && resultCode == Activity.RESULT_OK){
             Place place = Autocomplete.getPlaceFromIntent(data);
             //Set Address on editText
             home_destination.setText(place.getAddress());
+            googleMap.addMarker(new MarkerOptions().position(place.getLatLng()));
         } else if (resultCode == AutocompleteActivity.RESULT_ERROR){
             Status status = Autocomplete.getStatusFromIntent(data);
             Toast.makeText(getContext(),status.getStatusMessage(),Toast.LENGTH_SHORT).show();

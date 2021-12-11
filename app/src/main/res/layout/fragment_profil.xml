@@ -1,9 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/teal_200">
+    android:layout_marginTop="16dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginBottom="16dp"
+    tools:context=".fragment.ProfilFragment">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="1dp">
+
+        <TextView
+            android:id="@+id/et_profil_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Modifier mon profil"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="60dp"
+            android:gravity="center"
+            android:textSize="30sp"/>
+
+        <EditText
+            android:id="@+id/et_profil_firstname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:ems="10"
+            android:hint="@string/firstname"
+            android:inputType="textPersonName"
+            android:padding="10dp" />
+
+        <EditText
+            android:id="@+id/et_profil_lastname"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:ems="10"
+            android:hint="@string/lastname"
+            android:inputType="textPersonName"
+            android:padding="10dp" />
+
+        <EditText
+            android:id="@+id/et_profil_mail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            android:hint="@string/mail"
+            android:padding="10dp"
+            android:layout_marginBottom="10dp"
+            android:drawableEnd="@drawable/ic_mail"/>
+
+        <EditText
+            android:id="@+id/et_profil_oldpassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:hint="@string/password"
+            android:padding="10dp"
+            android:layout_marginBottom="10dp"
+            android:drawableEnd="@drawable/ic_lock"/>
+        <EditText
+            android:id="@+id/et_profil_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:hint="@string/password"
+            android:padding="10dp"
+            android:layout_marginBottom="10dp"
+            android:drawableEnd="@drawable/ic_lock"/>
+        <EditText
+            android:id="@+id/et_profil_password2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPassword"
+            android:hint="@string/repeatPassword"
+            android:padding="10dp"
+            android:layout_marginBottom="10dp"/>
+
+        <EditText
+            android:id="@+id/et_profil_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="phone"
+            android:hint="@string/phoneNumber"
+            android:padding="10dp"
+            android:drawableEnd="@drawable/ic_phone"/>
+
+        <Button
+            android:id="@+id/btn_profil_validation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Confirmer modification"
+            android:layout_margin="30dp"
+            style="@style/Btn"/>
+
+
+    </LinearLayout>
 
 
 </RelativeLayout>

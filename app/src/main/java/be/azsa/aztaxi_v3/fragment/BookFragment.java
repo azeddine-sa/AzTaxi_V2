@@ -182,7 +182,7 @@ public class BookFragment extends Fragment {
         public void onClick(View v) {
             //code
             //Volley
-            String postUrl = "http://192.168.0.241:8080/api/order/add";
+            String postUrl = "http://192.168.145.234:8080/api/order/add";
             RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
 
             //User
