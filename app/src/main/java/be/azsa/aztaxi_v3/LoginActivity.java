@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity {
                 User user = new User();
 
                 //Volley connexion API
-                String getUrl = "http://192.168.145.234:8080/api/user/bymail/"+mail;
+                String getUrl = getString(R.string.localhost)+"/user/bymail/"+mail;
 
                 StringRequest stringRequest = new StringRequest(Request.Method.GET, getUrl,
                         new Response.Listener<String>() {

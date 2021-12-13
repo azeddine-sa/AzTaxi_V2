@@ -64,7 +64,7 @@ public class HistoryFragment extends Fragment {
         }
 
         //recupération de la l'historique de l'utilisateur sur la BD
-        String getUrl = "http://192.168.145.234:8080/api/orders";
+        String getUrl = getString(R.string.localhost)+"/orders";
         RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest
                 (Request.Method.GET, getUrl, null, new Response.Listener<JSONArray>() {

@@ -83,7 +83,7 @@ public class ProfilFragment extends Fragment {
         @Override
         public void onClick(View v) {
             //Volley
-            String putUrl = "http://192.168.145.234:8080/api/user/"+idUser+"/edit";
+            String putUrl = getString(R.string.localhost)+"/user/"+idUser+"/edit";
             RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
 
             //User

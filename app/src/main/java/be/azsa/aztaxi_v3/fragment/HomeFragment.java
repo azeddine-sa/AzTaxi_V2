@@ -108,7 +108,7 @@ public class HomeFragment extends Fragment implements LocationListener {
         mapView.onResume();
 
         //init place
-        Places.initialize(getContext(), "AIzaSyAXu-Syn_KlkIqGq7TKrHqJBQIC_2aZ1zo");
+        Places.initialize(getContext(), getString(R.string.API_KEY));
         home_depart.setFocusable(false);
         home_depart.setOnClickListener(home_depart_listener);
         home_destination.setFocusable(false);
@@ -124,7 +124,7 @@ public class HomeFragment extends Fragment implements LocationListener {
         public void onClick(View v) {
             //code
             //Volley
-            String postUrl = "http://192.168.145.234:8080/api/order/add";
+            String postUrl = getString(R.string.localhost)+"/order/add";
             RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
 
             //User

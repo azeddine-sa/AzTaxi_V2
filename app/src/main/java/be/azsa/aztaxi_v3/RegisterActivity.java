@@ -54,7 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //Volley
-                String postUrl = "http://192.168.145.234:8080/api/user/add";
+                String postUrl = getString(R.string.localhost)+"/user/add";
                 RequestQueue requestQueue = Volley.newRequestQueue(RegisterActivity.this);
 
                 //User

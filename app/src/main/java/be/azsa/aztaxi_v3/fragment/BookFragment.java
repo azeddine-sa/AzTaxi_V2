@@ -97,7 +97,7 @@ public class BookFragment extends Fragment {
         book_commander = (Button) view.findViewById(R.id.btn_book_commander);
 
         //init place
-        Places.initialize(getContext(), "AIzaSyAXu-Syn_KlkIqGq7TKrHqJBQIC_2aZ1zo");
+        Places.initialize(getContext(), getString(R.string.API_KEY));
         book_depart.setFocusable(false);
         book_depart.setOnClickListener(book_depart_listener);
         book_destination.setFocusable(false);
@@ -194,7 +194,7 @@ public class BookFragment extends Fragment {
         public void onClick(View v) {
             //code
             //Volley
-            String postUrl = "http://192.168.145.234:8080/api/order/add";
+            String postUrl = getString(R.string.localhost)+"/order/add";
             RequestQueue requestQueue = Volley.newRequestQueue(getActivity().getApplicationContext());
 
             //User
