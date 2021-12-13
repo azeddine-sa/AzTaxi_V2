@@ -20,6 +20,8 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -53,6 +55,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private GoogleMap googleMap;
     private Geocoder geocoder;
 
+    //TexteView NavHeader
+    private TextView user_mail;
+    private TextView user_fullname;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +78,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        //View navheader
+        View headView  = navigationView.getHeaderView(0);
+
         //Récupération données de connexions
         Intent intent = getIntent();
         if(intent!=null){
@@ -84,6 +93,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 phone = intent.getStringExtra("phone");
 
                 user = new User(Long.parseLong(idUser), firstname, lastname, email,password,phone);
+
+                //set user mail (nav header)
+                user_mail = (TextView) headView.findViewById(R.id.nav_user);
+                user_fullname = (TextView) headView.findViewById(R.id.nav_mail);
+                user_mail.setText(email);
+                user_fullname.setText(firstname.toUpperCase()+" "+lastname.toUpperCase());
             }
         }else{
             Toast.makeText(MainActivity.this, "Erreur", Toast.LENGTH_SHORT).show();
@@ -110,7 +125,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
     }
-
 
     @Override
     public void onBackPressed() {

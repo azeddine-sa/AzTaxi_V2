@@ -104,7 +104,6 @@ public class HomeFragment extends Fragment implements LocationListener {
 
         mapView = (MapView) view.findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);
-
         mapView.onResume();
 
         //init place
