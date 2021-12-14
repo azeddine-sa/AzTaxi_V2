@@ -79,8 +79,11 @@ public class HistoryFragment extends Fragment {
                         String infos = jsonObject.getString("infos");
                         String user_id = jsonObject.getString("user");
 
+                        //Split user infos
+                        String[] user_parts = user_id.split(",");
+
                         //si user_id correspond a l'id de l'utilisateur connecté
-                        if (user_id.substring(10,11).equals(idUser)){
+                        if (user_parts[0].substring(10).replaceAll("\"","").equals(idUser)){
                             history_list.append("DEPART : "+departure+
                                     "\nDESTINATION : " +arrival+
                                     "\nDATE & HEURE DE COMMANDE : " +datetime.substring(0,10)+" - "+datetime.substring(11,16) +

@@ -56,6 +56,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
@@ -119,6 +120,7 @@ public class HomeFragment extends Fragment implements LocationListener {
 
     //Listener submit
     public View.OnClickListener home_submit_listener = new View.OnClickListener() {
+        @RequiresApi(api = Build.VERSION_CODES.O)
         @Override
         public void onClick(View v) {
             //code
@@ -155,6 +157,7 @@ public class HomeFragment extends Fragment implements LocationListener {
                 try {
                     postData.put("departure", departure);
                     postData.put("arrival", arrival);
+                    postData.put("datetime", LocalDateTime.now());
                     postData.put("infos", "");
                     postData.put("user", userData);
                 } catch (JSONException e) {
