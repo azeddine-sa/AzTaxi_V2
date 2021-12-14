@@ -121,8 +121,8 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(RegisterActivity.this, "Ajout Réussi", Toast.LENGTH_SHORT).show();
 
                     //redirection vers la page de connexion
-                    Intent Main = new Intent(getApplicationContext(), MainActivity.class);
-                    startActivity(Main);
+                    Intent Login = new Intent(getApplicationContext(), LoginActivity.class);
+                    startActivity(Login);
                 }
             }
         });
@@ -131,8 +131,8 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //redirection vers la page de connexion
-                Intent Main = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(Main);
+                Intent Login = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(Login);
             }
         });
     }

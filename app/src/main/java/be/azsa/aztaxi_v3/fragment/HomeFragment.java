@@ -159,6 +159,7 @@ public class HomeFragment extends Fragment implements LocationListener {
                     postData.put("arrival", arrival);
                     postData.put("datetime", LocalDateTime.now());
                     postData.put("infos", "");
+                    postData.put("status","SENT");
                     postData.put("user", userData);
                 } catch (JSONException e) {
                     e.printStackTrace();

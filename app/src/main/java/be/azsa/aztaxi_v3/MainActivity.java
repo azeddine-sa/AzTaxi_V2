@@ -131,7 +131,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if(drawer.isDrawerOpen(GravityCompat.START)){
             drawer.closeDrawer(GravityCompat.START);
         }else{
-            super.onBackPressed();
+            int count = getSupportFragmentManager().getBackStackEntryCount();
+
+            if (count == 0) {
+                //additional code
+            } else {
+                getSupportFragmentManager().popBackStack();
+            }
         }
     }
 
@@ -153,7 +159,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 bookFrag.setArguments(bundlebook);
 
-                bfTransaction.replace(R.id.fragment_container, bookFrag).commit();
+                bfTransaction.replace(R.id.fragment_container, bookFrag).addToBackStack(null).commit();
                 break;
             case R.id.nav_history:
                 HistoryFragment historyFrag = new HistoryFragment();
@@ -170,7 +176,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 historyFrag.setArguments(bundlehistory);
 
-                hfTransaction.replace(R.id.fragment_container, historyFrag).commit();
+                hfTransaction.replace(R.id.fragment_container, historyFrag).addToBackStack(null).commit();
                 break;
             case R.id.nav_profil:
                 ProfilFragment profilFrag = new ProfilFragment();
@@ -187,11 +193,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 profilFrag.setArguments(bundleprofil);
 
-                pfTransaction.replace(R.id.fragment_container,profilFrag).commit();
+                pfTransaction.replace(R.id.fragment_container,profilFrag).addToBackStack(null).commit();
                 break;
             case R.id.nav_contact_us:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ContactUsFragment()).commit();
+                        new ContactUsFragment()).addToBackStack(null).commit();
                 break;
             case R.id.nav_logout:
                 Intent LogOut = new Intent(getApplicationContext(), LoginActivity.class);
@@ -213,4 +219,5 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         this.password = password;
         this.phone = phone;
     }
+
 }

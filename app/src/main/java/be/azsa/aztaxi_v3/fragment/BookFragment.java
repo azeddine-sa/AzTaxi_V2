@@ -235,6 +235,7 @@ public class BookFragment extends Fragment {
                     postData.put("arrival", arrival);
                     postData.put("datetime", datetime);
                     postData.put("infos", info);
+                    postData.put("status","SENT");
                     postData.put("user", userData);
                 } catch (JSONException e) {
                     e.printStackTrace();
